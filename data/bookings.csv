@@ -1,0 +1,11 @@
+booking_id,court_id,time,duration,status,username
+1,Court A,09:00 AM,1 hour,active,Ed
+2,Court B,10:30 AM,1.5 hours,canceled,Caleb
+3,Court C,11:00 AM,2 hours,active,Ed
+4,Court A,01:00 PM,1 hour,active,Caleb
+5,Court D,02:30 PM,1.5 hours,canceled,Ed
+6,Court E,03:00 PM,2 hours,active,Caleb
+7,Court B,04:00 PM,1 hour,active,Ed
+8,Court C,05:30 PM,1.5 hours,canceled,Caleb
+9,Court A,06:00 PM,2 hours,active,Ed
+10,Court D,07:00 PM,1 hour,active,Caleb
