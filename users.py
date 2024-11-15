@@ -53,12 +53,12 @@ def log_in(users):
     username = get_user_input("\nEnter your username: ").strip().upper()
     if username not in users:
         print("\nUsername does not exist. Please try again.")
-        return None  # 11. Recursion not used here
+        return None  
     else:
         password = get_user_input("\nEnter your password: ").strip()
         if users[username] == password:
             print("\nPassword is correct. You are logged in!")
-            return username  # 5. Returning functions not used here
+            return username  
         else:
             print("\nPassword is incorrect.")
             return None
