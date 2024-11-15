@@ -78,8 +78,6 @@ def signup_action(users):
     return sign_up(users)
 
 # 2. Assigning a Function to a Variable:
-# 3. Creating a List of Functions: 
-
 actions = {
     "1": login_action,
     "2": signup_action,
