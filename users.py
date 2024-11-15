@@ -78,14 +78,13 @@ def signup_action(users):
     return sign_up(users)
 
 # 2. Assigning a Function to a Variable:
+# 3. Creating a List of Functions: 
+
 actions = {
     "1": login_action,
     "2": signup_action,
     "3": quit_action
 }
-
-# 3. Creating a List of Functions: 
-# Not directly applicable here, but mapping serves a similar purpose.
 
 def handle_action(choice, users):
     """Handle user action based on choice."""
