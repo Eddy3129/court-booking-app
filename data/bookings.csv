@@ -21,4 +21,4 @@ booking_id,court_id,day,start_time,end_time,duration,status,username
 20,G,Saturday,05:00 PM,06:00 PM,1 hour,active,Caleb
 21,A,Monday,10:00 AM,12:00 PM,2 hours,canceled,Ed
 22,A,Monday,11:00 AM,12:00 PM,1 hour,canceled,Ed
-23,B,Tuesday,11:00 AM,12:00 PM,1.0 hour,active,Ed
+23,B,Tuesday,11:00 AM,12:00 PM,1.0 hour,canceled,Ed

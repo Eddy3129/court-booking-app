@@ -120,8 +120,9 @@ def create_booking_flow(bookings, current_user, court_filter):
                 parsed_start_time = datetime.strptime(start_time_input, "%I:%M %p")
                 # Reformat time to standard format
                 start_time = parsed_start_time.strftime("%I:%M %p")
-                # Check if the start time slot exists using any and lambdas
-                if not any(start_time in court_filter.days[day_num - 1][court] for court in court_filter.days[day_num - 1]):
+                #6) Mapping: Use map to check availability for all courts
+                availability = list(map(lambda court: start_time in court_filter.days[day_num - 1][court], court_filter.days[day_num - 1]))
+                if not any(availability):
                     print(f"The start time slot '{start_time}' is not available. Please choose a valid 30-minute interval.")
                     continue
                 break
@@ -164,7 +165,6 @@ def create_booking_flow(bookings, current_user, court_filter):
             print(f"Booking created successfully for Court {court_id} on {day} from {start_time} to {end_time} for {duration}.")
             break
         else:
-            # 6. Mapping: Prompt to retry booking creation
             retry = users.get_user_input("Failed to create booking. Do you want to try again? (y/n): ").strip().lower()  # 4. Passing functions as arguments
             if retry != 'y':
                 print("Booking creation canceled.")
@@ -204,7 +204,9 @@ def check_court_availability(court_filter):
             # Reformat time to standard format
             time_slot = parsed_time.strftime("%I:%M %p")
             # Check if the time slot exists in any court for the given day using filtering
-            if not any(time_slot in court_filter.days[day_index][court] for court in court_filter.days[day_index]):
+            #6) Mapping: Use map to check availability for all courts
+            availability_check = list(map(lambda court: time_slot in court_filter.days[day_index][court], court_filter.days[day_index]))
+            if not any(availability_check):
                 print(f"The time slot '{time_slot}' is not available. Please choose a valid 30-minute interval.")
                 continue
             break
@@ -226,14 +228,12 @@ def main():
     bookings = Bookings()  # 1. Separating functions and data
     court_filter = CourtFilter()
 
-    # 8. Reducing: Synchronize court availability with existing bookings
     court_filter.synchronize_with_bookings(bookings.bookings)
 
     while True:
         main_menu()
         choice = users.get_user_input("Enter your choice (1-3): ").strip()  # 4. Passing functions as arguments
 
-        # 6. Mapping: Retrieve the function based on user choice
         if choice in ['1', '2', '3']:
             if choice == "1":
                 username = users.log_in(users_data)  # 2. Assigning a function to a variable
