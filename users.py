@@ -84,17 +84,18 @@ actions = {
     "3": quit_action
 }
 
+def execute_user_action(action_fn, users):
+    """Takes a function and executes it with the given users."""
+    return action_fn(users)
+
 def handle_action(choice, users):
-    """Handle user action based on choice."""
-    action_fn = actions.get(choice)
+    action_fn = actions.get(choice)  # Fetch the function
     if action_fn:
         if choice == "3":
-            action_fn()  # Call the quit action and break
-        elif choice in ["1", "2"]:
-            result = action_fn(users)  # Call login or signup
-            if choice == "2":
-                users = result  # Update users after signup
-            return users
+            action_fn()  # Quit action doesn't need users
+        else:
+            # Pass the fetched function (action_fn) to another function for execution
+            users = execute_user_action(action_fn, users)
     else:
         print("\nInvalid option. Try again.")
     return users
