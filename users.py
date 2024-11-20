@@ -53,12 +53,12 @@ def log_in(users):
     username = get_user_input("\nEnter your username: ").strip().upper()
     if username not in users:
         print("\nUsername does not exist. Please try again.")
-        return None  # 11. Recursion not used here
+        return None  
     else:
         password = get_user_input("\nEnter your password: ").strip()
         if users[username] == password:
             print("\nPassword is correct. You are logged in!")
-            return username  # 5. Returning functions not used here
+            return username  
         else:
             print("\nPassword is incorrect.")
             return None
@@ -84,20 +84,18 @@ actions = {
     "3": quit_action
 }
 
-# 3. Creating a List of Functions: 
-# Not directly applicable here, but mapping serves a similar purpose.
+def execute_user_action(action_fn, users):
+    """Takes a function and executes it with the given users."""
+    return action_fn(users)
 
 def handle_action(choice, users):
-    """Handle user action based on choice."""
-    action_fn = actions.get(choice)
+    action_fn = actions.get(choice)  # Fetch the function
     if action_fn:
         if choice == "3":
-            action_fn()  # Call the quit action and break
-        elif choice in ["1", "2"]:
-            result = action_fn(users)  # Call login or signup
-            if choice == "2":
-                users = result  # Update users after signup
-            return users
+            action_fn()  # Quit action doesn't need users
+        else:
+            # Pass the fetched function (action_fn) to another function for execution
+            users = execute_user_action(action_fn, users)
     else:
         print("\nInvalid option. Try again.")
     return users
